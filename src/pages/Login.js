@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setEmail }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,6 +27,7 @@ const Login = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          setEmail(username);
           navigate("/home");
         } else {
           setErrorMessage("Identifiants incorrects");
@@ -57,7 +58,7 @@ const Login = () => {
               </label>
               <input
                 type="text"
-                id="username"
+                id="email"
                 className="form-control"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}

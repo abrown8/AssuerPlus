@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-const DeclarationSinistre = () => {
+const DeclarationSinistre = ({ email }) => {
   const [nom, setNom] = useState("");
-  const [nomErr, setNomErr] = useState("");
   const [prenom, setPrenom] = useState("");
   const [dateSinistre, setDateSinistre] = useState("");
   const [description, setDescription] = useState("");
@@ -23,7 +22,6 @@ const DeclarationSinistre = () => {
   const [paysError, setPaysError] = useState("");
 
   const handleSubmit = (event) => {
-    console.log("handleSubmit Statrt");
     event.preventDefault();
 
     let hasError = false;
@@ -115,8 +113,49 @@ const DeclarationSinistre = () => {
     if (hasError) {
       return;
     }
-
-    alert("Formulaire correct");
+    setSuccessMessage(
+      "Votre formulaire est correctement complété et a été soumis"
+    );
+    const credentials = {
+      nom: nom,
+      prenom: prenom,
+      dateSinistre: dateSinistre,
+      description: description,
+      adresse: adresse,
+      codePostal: codePostal,
+      ville: ville,
+      pays: pays,
+      //photos: photos,
+      email: email,
+    };
+    console.log(credentials);
+    fetch("http://localhost/assuerplus/setUpSinistre.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // La requête a réussi
+          console.log("Requête envoyée avec succès");
+          return response.json(); // On renvoie la réponse sous forme de JSON
+        } else {
+          // La requête a échoué
+          console.error("Erreur lors de l'envoi de la requête");
+          throw new Error("Une erreur est survenue");
+        }
+      })
+      .then((data) => {
+        // Traitement des données de la réponse
+        console.log(data);
+      })
+      .catch((error) => {
+        // Une erreur s'est produite lors de l'envoi de la requête
+        console.error(error);
+        console.log("Erreur avec la requête");
+      });
   };
 
   return (
