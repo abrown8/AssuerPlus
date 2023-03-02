@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DeclarationSinistre = ({ email }) => {
+const DeclarationSinistre = ({ email, handleFormSubmit }) => {
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [dateSinistre, setDateSinistre] = useState("");
@@ -20,6 +20,23 @@ const DeclarationSinistre = ({ email }) => {
   const [codePostalError, setCodePostalError] = useState("");
   const [villeError, setVilleError] = useState("");
   const [paysError, setPaysError] = useState("");
+
+  const filesToJson = (files) => {
+    const fileArray = Array.from(files);
+    const filesObject = {};
+
+    fileArray.forEach((file, index) => {
+      filesObject["file_" + index] = {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        lastModified: file.lastModified,
+        tmp_name: file.tmp_name,
+      };
+    });
+
+    return filesObject;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,21 +111,7 @@ const DeclarationSinistre = ({ email }) => {
       setPaysError("");
     }
 
-    // Vérification du champ photo
-    if (photos.length === 0) {
-      setPhotosError("Veuillez sélectionner au moins une photo");
-      hasError = true;
-    } else {
-      if (
-        !Array.from(photos).every((photo) => photo.type.startsWith("image/"))
-      ) {
-        setPhotosError("Veuillez sélectionner des photos au format image");
-        hasError = true;
-      } else {
-        setPhotosError("");
-      }
-    }
-
+    const photos_files = filesToJson(photos);
     // Si le formulaire contient des erreurs, on ne fait rien
     if (hasError) {
       return;
@@ -125,10 +128,10 @@ const DeclarationSinistre = ({ email }) => {
       codePostal: codePostal,
       ville: ville,
       pays: pays,
-      //photos: photos,
       email: email,
+      photos: photos_files,
     };
-    console.log(credentials);
+    console.log("credentials=", credentials);
     fetch("http://localhost/assuerplus/setUpSinistre.php", {
       method: "POST",
       headers: {
@@ -156,6 +159,7 @@ const DeclarationSinistre = ({ email }) => {
         console.error(error);
         console.log("Erreur avec la requête");
       });
+    handleFormSubmit(adresse, codePostal, ville, pays); // appel de la fonction handleFormSubmit de Home.js
   };
 
   return (

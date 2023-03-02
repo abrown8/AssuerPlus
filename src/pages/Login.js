@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const Login = ({ setEmail }) => {
   const [username, setUsername] = useState("");
@@ -42,44 +43,48 @@ const Login = ({ setEmail }) => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="card">
-        <div className="card-header">
-          <h3>Connexion</h3>
-        </div>
-        <div className="card-body">
-          {errorMessage && (
-            <div className="alert alert-danger">{errorMessage}</div>
-          )}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <input
-                type="text"
-                id="email"
-                className="form-control"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="form-control"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Se connecter
-            </button>
-          </form>
+    <div>
+      <Header />
+      <br />
+      <div className="container mt-5">
+        <div className="card">
+          <div className="card-header">
+            <h3>Connexion</h3>
+          </div>
+          <div className="card-body">
+            {errorMessage && (
+              <div className="alert alert-danger">{errorMessage}</div>
+            )}
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="text"
+                  id="email"
+                  className="form-control"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Se connecter
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
