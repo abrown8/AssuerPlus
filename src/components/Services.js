@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const Services = ({ adresse, codePostal, ville, pays }) => {
+  // Déclaration des états locaux avec useState
   const [services, setServices] = useState([]);
 
+  // Effectue une requête au serveur pour récupérer les services en fonction de l'adresse, du code postal, de la ville et du pays fournis.
   useEffect(() => {
     const fetchServices = async () => {
       const response = await fetch(
@@ -22,12 +24,12 @@ const Services = ({ adresse, codePostal, ville, pays }) => {
     fetchServices();
   }, [adresse, codePostal, ville, pays]);
 
-  useEffect(() => {
-    console.log("setService ->", services);
-  }, [services]);
-
   return (
     <div>
+      <div className="alert alert-success" role="alert">
+        Déclaration bien reçu, en attendant que votre dossier soit traité pour
+        remboursement, vous pouvez contacter ces services :
+      </div>
       <h3 className="display-6">Service de remorquage le(s) plus proche(s)</h3>
       {services.hasOwnProperty("servicesRemorquage") &&
       services.servicesRemorquage.length > 0 ? (
@@ -40,6 +42,9 @@ const Services = ({ adresse, codePostal, ville, pays }) => {
                     {service_occ.nom}
                   </div>
                   <div className="card-body">
+                    <p>
+                      <strong>Téléphone :</strong> {service_occ.telephone}
+                    </p>
                     <p>
                       <strong>Adresse :</strong> {service_occ.adresse}
                     </p>
@@ -74,6 +79,9 @@ const Services = ({ adresse, codePostal, ville, pays }) => {
                     {service_occ.nom}
                   </div>
                   <div className="card-body">
+                    <p>
+                      <strong>Téléphone :</strong> {service_occ.telephone}
+                    </p>
                     <p>
                       <strong>Adresse :</strong> {service_occ.adresse}
                     </p>

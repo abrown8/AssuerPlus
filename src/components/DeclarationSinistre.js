@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const DeclarationSinistre = ({ email, handleFormSubmit }) => {
+  // Déclaration des états locaux avec useState
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [dateSinistre, setDateSinistre] = useState("");
@@ -15,7 +16,6 @@ const DeclarationSinistre = ({ email, handleFormSubmit }) => {
   const [prenomError, setPrenomError] = useState("");
   const [dateSinistreError, setDateSinistreError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [photosError, setPhotosError] = useState("");
   const [adresseError, setAdresseError] = useState("");
   const [codePostalError, setCodePostalError] = useState("");
   const [villeError, setVilleError] = useState("");
@@ -163,7 +163,7 @@ const DeclarationSinistre = ({ email, handleFormSubmit }) => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <div className="card">
         <div className="card-header">
           <h3>Déclarer un sinistre</h3>
@@ -248,9 +248,6 @@ const DeclarationSinistre = ({ email, handleFormSubmit }) => {
                 onChange={(event) => setPhotos(event.target.files)}
               />
             </div>
-            {photosError && (
-              <div className="alert alert-danger">{photosError}</div>
-            )}
 
             <div className="mb-3">
               <h4>Lieu de l'accident</h4>
@@ -270,52 +267,55 @@ const DeclarationSinistre = ({ email, handleFormSubmit }) => {
                 {adresseError && (
                   <div className="alert alert-danger">{adresseError}</div>
                 )}
-                <div className="col-sm-2 mb-3">
-                  <label htmlFor="codePostal" className="form-label">
-                    Code postal
-                  </label>
-                  <input
-                    type="text"
-                    id="codePostal"
-                    className="form-control"
-                    value={codePostal}
-                    onChange={(event) => setCodePostal(event.target.value)}
-                  />
+                <div className="row">
+                  <div className="col-md-2 mb-3">
+                    <label htmlFor="codePostal" className="form-label">
+                      Code postal
+                    </label>
+                    <input
+                      type="text"
+                      id="codePostal"
+                      className="form-control"
+                      value={codePostal}
+                      onChange={(event) => setCodePostal(event.target.value)}
+                    />
+                    {codePostalError && (
+                      <div className="alert alert-danger">
+                        {codePostalError}
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-md-5 mb-3">
+                    <label htmlFor="ville" className="form-label">
+                      Ville
+                    </label>
+                    <input
+                      type="text"
+                      id="ville"
+                      className="form-control"
+                      value={ville}
+                      onChange={(event) => setVille(event.target.value)}
+                    />
+                    {villeError && (
+                      <div className="alert alert-danger">{villeError}</div>
+                    )}
+                  </div>
+                  <div className="col-md-5 mb-3">
+                    <label htmlFor="pays" className="form-label">
+                      Pays
+                    </label>
+                    <input
+                      type="text"
+                      id="pays"
+                      className="form-control"
+                      value={pays}
+                      onChange={(event) => setPays(event.target.value)}
+                    />
+                    {paysError && (
+                      <div className="alert alert-danger">{paysError}</div>
+                    )}
+                  </div>
                 </div>
-                {codePostalError && (
-                  <div className="alert alert-danger">{codePostalError}</div>
-                )}
-                <div className="col-sm-5 mb-3">
-                  <label htmlFor="ville" className="form-label">
-                    Ville
-                  </label>
-                  <input
-                    type="text"
-                    id="ville"
-                    className="form-control"
-                    value={ville}
-                    onChange={(event) => setVille(event.target.value)}
-                  />
-                </div>
-                {villeError && (
-                  <div className="alert alert-danger">{villeError}</div>
-                )}
-
-                <div className="col-sm-5 mb-3">
-                  <label htmlFor="pays" className="form-label">
-                    Pays
-                  </label>
-                  <input
-                    type="text"
-                    id="pays"
-                    className="form-control"
-                    value={pays}
-                    onChange={(event) => setPays(event.target.value)}
-                  />
-                </div>
-                {paysError && (
-                  <div className="alert alert-danger">{paysError}</div>
-                )}
               </div>
             </div>
             <button type="submit" className="btn btn-primary">

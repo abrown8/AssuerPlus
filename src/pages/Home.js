@@ -4,23 +4,26 @@ import Services from "../components/Services";
 import Header from "../components/Header";
 
 const Home = ({ email }) => {
+  // Déclaration des états locaux avec useState
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [adresse, setAdresse] = useState("");
-  const [codePostal, setCodePostal] = useState("");
-  const [ville, setVille] = useState("");
-  const [pays, setPays] = useState("");
+  const [adresseSinistre, setAdresseSinistre] = useState("");
+  const [codePostalSinistre, setCodePostalSinistre] = useState("");
+  const [villeSinistre, setVilleSinistre] = useState("");
+  const [paysSinistre, setPaysSinistre] = useState("");
 
+  // Fonction appelée lorsque le formulaire de déclaration de sinistre est soumis
   const handleFormSubmit = (
     submitedAdresse,
     submitedCodePostal,
     submitedVille,
     submitedPays
   ) => {
+    // Mise à jour des états locaux avec les valeurs saisies dans le formulaire
     setFormSubmitted(true);
-    setAdresse(submitedAdresse);
-    setCodePostal(submitedCodePostal);
-    setVille(submitedVille);
-    setPays(submitedPays);
+    setAdresseSinistre(submitedAdresse);
+    setCodePostalSinistre(submitedCodePostal);
+    setVilleSinistre(submitedVille);
+    setPaysSinistre(submitedPays);
   };
 
   return (
@@ -30,10 +33,10 @@ const Home = ({ email }) => {
       <div className="container">
         {formSubmitted ? (
           <Services
-            adresse={adresse}
-            codePostal={codePostal}
-            ville={ville}
-            pays={pays}
+            adresse={adresseSinistre}
+            codePostal={codePostalSinistre}
+            ville={villeSinistre}
+            pays={paysSinistre}
           />
         ) : (
           <DeclarationSinistre
