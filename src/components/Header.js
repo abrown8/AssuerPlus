@@ -5,20 +5,26 @@ function Header() {
   return (
     <nav className="navbar navbar-dark bg-info" style={{ overflowX: "hidden" }}>
       <div className="container-fluid">
-        <div className="d-flex justify-content-start align-items-center">
-          <img
-            src={logo}
-            alt="AssuerPlus"
-            className="m-5 img-fluid"
-            style={{ maxWidth: "100px", maxHeight: "80px" }}
-          />
-          <h1 className="display-3 text-light ">AssuerPlus</h1>
-          <img
-            src={logo}
-            alt="AssuerPlus"
-            className="m-5 img-fluid"
-            style={{ maxWidth: "100px", maxHeight: "80px" }}
-          />
+        <div className="row d-flex justify-content-center align-items-center">
+          <div className="col-3 text-center">
+            <img
+              src={logo}
+              alt="AssuerPlus"
+              className="img-fluid"
+              style={{ maxWidth: "60%", maxHeight: "60%" }}
+            />
+          </div>
+          <div className="col-6 text-center">
+            <h1 className="display-3 text-light ">AssuerPlus</h1>
+          </div>
+          <div className="col-3 text-center">
+            <img
+              src={logo}
+              alt="AssuerPlus"
+              className="img-fluid"
+              style={{ maxWidth: "60%", maxHeight: "60%" }}
+            />
+          </div>
         </div>
       </div>
     </nav>
