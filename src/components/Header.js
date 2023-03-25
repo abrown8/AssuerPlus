@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/voiture.png";
 
 function Header() {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const maxDimension = screenWidth > 1300 ? "30%" : "60%";
+
   return (
     <nav className="navbar navbar-dark bg-info" style={{ overflowX: "hidden" }}>
       <div className="container-fluid">
@@ -11,7 +21,7 @@ function Header() {
               src={logo}
               alt="AssuerPlus"
               className="img-fluid"
-              style={{ maxWidth: "60%", maxHeight: "60%" }}
+              style={{ maxWidth: maxDimension, maxHeight: maxDimension }}
             />
           </div>
           <div className="col-6 text-center">
@@ -22,7 +32,7 @@ function Header() {
               src={logo}
               alt="AssuerPlus"
               className="img-fluid"
-              style={{ maxWidth: "60%", maxHeight: "60%" }}
+              style={{ maxWidth: maxDimension, maxHeight: maxDimension }}
             />
           </div>
         </div>
