@@ -11,12 +11,12 @@ const Login = ({ setEmail }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     // Créer un objet qui contient les informations d'identification
     const credentials = {
       email: username,
       password: password,
     };
+    console.log(credentials);
 
     // Envoyer une requête POST à l'URL spécifiée avec les informations d'identification
     fetch("http://localhost/assuerplus/login.php", {
